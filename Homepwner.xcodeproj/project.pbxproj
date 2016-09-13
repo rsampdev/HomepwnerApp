@@ -9,10 +9,12 @@
 /* Begin PBXBuildFile section */
 		3375C3231D88471200484558 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3375C3221D88471200484558 /* main.m */; };
 		3375C3261D88471200484558 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3375C3251D88471200484558 /* AppDelegate.m */; };
-		3375C3291D88471200484558 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3375C3281D88471200484558 /* ViewController.m */; };
 		3375C32C1D88471200484558 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3375C32A1D88471200484558 /* Main.storyboard */; };
 		3375C32E1D88471200484558 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3375C32D1D88471200484558 /* Assets.xcassets */; };
 		3375C3311D88471200484558 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3375C32F1D88471200484558 /* LaunchScreen.storyboard */; };
+		3375C33A1D88479700484558 /* ItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3375C3391D88479700484558 /* ItemsViewController.m */; };
+		3375C33D1D88605100484558 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 3375C33C1D88605100484558 /* Item.m */; };
+		3375C3401D88743C00484558 /* ItemStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 3375C33F1D88743C00484558 /* ItemStore.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,12 +22,16 @@
 		3375C3221D88471200484558 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3375C3241D88471200484558 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3375C3251D88471200484558 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		3375C3271D88471200484558 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		3375C3281D88471200484558 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		3375C32B1D88471200484558 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3375C32D1D88471200484558 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3375C3301D88471200484558 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3375C3321D88471200484558 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3375C3381D88479700484558 /* ItemsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemsViewController.h; sourceTree = "<group>"; };
+		3375C3391D88479700484558 /* ItemsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemsViewController.m; sourceTree = "<group>"; };
+		3375C33B1D88605100484558 /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
+		3375C33C1D88605100484558 /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Item.m; sourceTree = "<group>"; };
+		3375C33E1D88743C00484558 /* ItemStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemStore.h; sourceTree = "<group>"; };
+		3375C33F1D88743C00484558 /* ItemStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemStore.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,12 +66,16 @@
 			children = (
 				3375C3241D88471200484558 /* AppDelegate.h */,
 				3375C3251D88471200484558 /* AppDelegate.m */,
-				3375C3271D88471200484558 /* ViewController.h */,
-				3375C3281D88471200484558 /* ViewController.m */,
-				3375C32A1D88471200484558 /* Main.storyboard */,
 				3375C32D1D88471200484558 /* Assets.xcassets */,
-				3375C32F1D88471200484558 /* LaunchScreen.storyboard */,
 				3375C3321D88471200484558 /* Info.plist */,
+				3375C33B1D88605100484558 /* Item.h */,
+				3375C33C1D88605100484558 /* Item.m */,
+				3375C33E1D88743C00484558 /* ItemStore.h */,
+				3375C33F1D88743C00484558 /* ItemStore.m */,
+				3375C3381D88479700484558 /* ItemsViewController.h */,
+				3375C3391D88479700484558 /* ItemsViewController.m */,
+				3375C32F1D88471200484558 /* LaunchScreen.storyboard */,
+				3375C32A1D88471200484558 /* Main.storyboard */,
 				3375C3211D88471200484558 /* Supporting Files */,
 			);
 			path = Homepwner;
@@ -150,9 +160,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3375C3291D88471200484558 /* ViewController.m in Sources */,
+				3375C33D1D88605100484558 /* Item.m in Sources */,
+				3375C33A1D88479700484558 /* ItemsViewController.m in Sources */,
 				3375C3261D88471200484558 /* AppDelegate.m in Sources */,
 				3375C3231D88471200484558 /* main.m in Sources */,
+				3375C3401D88743C00484558 /* ItemStore.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
