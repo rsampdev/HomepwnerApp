@@ -41,59 +41,89 @@
             [self.itemsUnderFifty addObject:item];
         }
     }
+    
+    NSLog(@"\n\n\n\n\n%@ %@ %@", @(self.itemStore.allItems.count), @(self.itemsUnderFifty.count), @(self.itemsOverFifty.count));
 }
 
 // MARK: - Table View Data Source and Delegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    NSInteger rtn = 0;
+    
     if (self.itemsUnderFifty != nil && self.itemsOverFifty != nil) {
-        if (self.itemsUnderFifty.count >= 1 && self.itemsOverFifty.count >= 1) {
-            return 2;
-        } else if (self.itemsUnderFifty.count >= 1) {
-            return 1;
-        } else {
-            return 0;
+        if (self.itemsUnderFifty.count >= 1 || self.itemsOverFifty.count >= 1) {
+            rtn++;
+            if (self.itemsOverFifty.count >= 1 && self.itemsUnderFifty.count >= 1) {
+                rtn++;
+            }
         }
-    } else {
-        return 0;
     }
+    
+    return rtn;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    NSString *rtn = @"Unknown";
+    
     if (section == 0) {
-        return @"Items under $50";
+        if (self.itemsUnderFifty.count == 0) {
+            rtn = @"Items over $50";
+        } else {
+            rtn = @"Items under $50";
+        }
     } else if (section == 1) {
-        return @"Items over $50";
-    } else {
-        return @"Unknown";
+        rtn = @"Items over $50";
     }
+    
+    return rtn;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    NSInteger rtn = 0;
+    
     if (section == 0) {
-        return self.itemsUnderFifty.count;
+        if (self.itemsOverFifty.count == 0) {
+            rtn = self.itemsUnderFifty.count + 1;
+        } else {
+            if (self.itemsUnderFifty.count == 0) {
+                rtn = self.itemsOverFifty.count + 1;
+            } else {
+                rtn = self.itemsUnderFifty.count;
+            }
+        }
     } else if (section == 1) {
-        return self.itemsOverFifty.count;
-    } else {
-        return 0;
+        rtn = self.itemsOverFifty.count + 1;
     }
+    
+    return rtn;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"\n\n\n\n\nworking...");
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"UITableViewCell" forIndexPath:indexPath];
     
     Item *item = nil;
     NSInteger section = indexPath.section;
     NSInteger row = indexPath.row;
-
-    if (section == 0 && row < self.itemsUnderFifty.count) {
+    
+    if ((section == 0 || self.itemsOverFifty.count == 0) && row < self.itemsUnderFifty.count) {
         item = self.itemsUnderFifty[row];
-    } else if (section == 1 && row < self.itemsOverFifty.count) {
+    } else if ((section == 1 || self.itemsUnderFifty.count == 0) && row < self.itemsOverFifty.count) {
         item = self.itemsOverFifty[row];
     }
     
     cell.textLabel.text = item.name;
     cell.detailTextLabel.text = [NSString stringWithFormat:@"$%d", item.valueInDollars];
+    
+    if (item == self.itemsUnderFifty.lastObject && row == self.itemsUnderFifty.count - 1 && self.itemsOverFifty.count == 0) {
+        [self.itemsUnderFifty addObject:[[Item alloc] initWithName:@"No more items!" serialNumber:@"" valueInDollars:-1]];
+    } else if (item == self.itemsOverFifty.lastObject && row == self.itemsOverFifty.count - 1) {
+        [self.itemsOverFifty addObject:[[Item alloc] initWithName:@"No more items!" serialNumber:@"" valueInDollars:-1]];
+    }
+    
+    if (item.valueInDollars < 0) {
+        cell.detailTextLabel.text = @"";
+    }
     
     return cell;
 }
