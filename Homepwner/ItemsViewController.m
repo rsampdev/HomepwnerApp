@@ -111,29 +111,29 @@
         cell.textLabel.text = @"No more items!";
         cell.detailTextLabel.text = @"";
     } else {
-    
-    Item *item = nil;
-    NSInteger section = indexPath.section;
-    NSInteger row = indexPath.row;
-    
-    if ((section == 0 || self.itemsOverFifty.count == 0) && row < self.itemsUnderFifty.count) {
-        item = self.itemsUnderFifty[row];
-    } else if ((section == 1 || self.itemsUnderFifty.count == 0) && row < self.itemsOverFifty.count) {
-        item = self.itemsOverFifty[row];
-    }
-    
-    cell.textLabel.text = item.name;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"$%d", item.valueInDollars];
-    
-    if (item == self.itemsUnderFifty.lastObject && row == self.itemsUnderFifty.count - 1 && self.itemsOverFifty.count == 0) {
-        [self.itemsUnderFifty addObject:[[Item alloc] initWithName:@"No more items!" serialNumber:@"" valueInDollars:-1]];
-    } else if (item == self.itemsOverFifty.lastObject && row == self.itemsOverFifty.count - 1) {
-        [self.itemsOverFifty addObject:[[Item alloc] initWithName:@"No more items!" serialNumber:@"" valueInDollars:-1]];
-    }
-    
-    if (item.valueInDollars < 0) {
-        cell.detailTextLabel.text = @"";
-    }
+        
+        Item *item = nil;
+        NSInteger section = indexPath.section;
+        NSInteger row = indexPath.row;
+        
+        if ((section == 0 || self.itemsOverFifty.count == 0) && row < self.itemsUnderFifty.count) {
+            item = self.itemsUnderFifty[row];
+        } else if ((section == 1 || self.itemsUnderFifty.count == 0) && row < self.itemsOverFifty.count) {
+            item = self.itemsOverFifty[row];
+        }
+        
+        cell.textLabel.text = item.name;
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"$%d", item.valueInDollars];
+        
+        if (item == self.itemsUnderFifty.lastObject && row == self.itemsUnderFifty.count - 1 && self.itemsOverFifty.count == 0) {
+            [self.itemsUnderFifty addObject:[[Item alloc] initWithName:@"No more items!" serialNumber:@"" valueInDollars:-1]];
+        } else if (item == self.itemsOverFifty.lastObject && row == self.itemsOverFifty.count - 1) {
+            [self.itemsOverFifty addObject:[[Item alloc] initWithName:@"No more items!" serialNumber:@"" valueInDollars:-1]];
+        }
+        
+        if (item.valueInDollars < 0) {
+            cell.detailTextLabel.text = @"";
+        }
     }
     
     return cell;
