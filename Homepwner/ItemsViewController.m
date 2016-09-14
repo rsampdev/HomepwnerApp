@@ -36,13 +36,11 @@
         item = self.itemStore.allItems[i];
         
         if (item.valueInDollars >= 50) {
-            //[self.itemsOverFifty addObject:item];
+            [self.itemsOverFifty addObject:item];
         } else if (item.valueInDollars < 50) {
-            //[self.itemsUnderFifty addObject:item];
+            [self.itemsUnderFifty addObject:item];
         }
     }
-    
-    NSLog(@"\n\n\n\n\n%@ %@ %@", @(self.itemStore.allItems.count), @(self.itemsUnderFifty.count), @(self.itemsOverFifty.count));
 }
 
 // MARK: - Table View Data Source and Delegate
@@ -72,9 +70,9 @@
             rtn = @"Empty";
         } else {
             if (self.itemsOverFifty.count == 0) {
-                rtn = @"Items over $50";
-            } else {
                 rtn = @"Items under $50";
+            } else {
+                rtn = @"Items over $50";
             }
         }
     } else if (section == 1) {
