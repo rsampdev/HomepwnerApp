@@ -18,16 +18,35 @@
 
 @implementation ItemsViewController
 
+// MARK: - Initializers
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        self.navigationItem.leftBarButtonItem = [self editButtonItem];
+    }
+    return self;
+}
+
 // MARK: - View Lifecycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    CGFloat statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
-    UIEdgeInsets insets = UIEdgeInsetsMake(statusBarHeight, 0, 0, 0);
-    self.tableView.contentInset = insets;
-    self.tableView.scrollIndicatorInsets = insets;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 65;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.tableView reloadData];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"ShowItem"]) {
+        NSInteger row = [self.tableView indexPathForSelectedRow].row;
+        Item *item = self.itemStore.allItems[row];
+        DetailViewController *dvc = (DetailViewController *)segue.destinationViewController;
+        dvc.item = item;
+    }
 }
 
 // MARK: - Actions
@@ -37,26 +56,6 @@
     NSUInteger itemIndex = [self.itemStore.allItems indexOfObject:newItem];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:itemIndex inSection:0];
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-}
-
-- (IBAction)toggleEditingMode:(id)sender {
-    if (self.editing) {
-        [sender setTitle:@"Edit" forState:UIControlStateNormal];
-        [self setEditing:NO animated:YES];
-    } else {
-        [sender setTitle:@"Done" forState:UIControlStateNormal];
-        [self setEditing:YES animated:YES];
-    }
-}
-
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"ShowItem"]) {
-        NSInteger row = [self.tableView indexPathForSelectedRow].row;
-        Item *item = self.itemStore.allItems[row];
-        DetailViewController *dvc = (DetailViewController *)segue.destinationViewController;
-        dvc.item = item;
-    }
 }
 
 // MARK: - Table View Data Source and Delegate
