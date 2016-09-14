@@ -10,6 +10,7 @@
 #import "ItemStore.h"
 #import "Item.h"
 #import "ItemCell.h"
+#import "DetailViewController.h"
 
 @interface ItemsViewController ()
 
@@ -45,6 +46,16 @@
     } else {
         [sender setTitle:@"Done" forState:UIControlStateNormal];
         [self setEditing:YES animated:YES];
+    }
+}
+
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"ShowItem"]) {
+        NSInteger row = [self.tableView indexPathForSelectedRow].row;
+        Item *item = self.itemStore.allItems[row];
+        DetailViewController *dvc = (DetailViewController *)segue.destinationViewController;
+        dvc.item = item;
     }
 }
 

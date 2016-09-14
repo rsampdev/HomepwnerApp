@@ -16,6 +16,7 @@
 		3375C33D1D88605100484558 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 3375C33C1D88605100484558 /* Item.m */; };
 		3375C3401D88743C00484558 /* ItemStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 3375C33F1D88743C00484558 /* ItemStore.m */; };
 		3375C3431D89914500484558 /* ItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3375C3421D89914500484558 /* ItemCell.m */; };
+		3375C3461D89BBE400484558 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3375C3451D89BBE400484558 /* DetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,8 @@
 		3375C33F1D88743C00484558 /* ItemStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemStore.m; sourceTree = "<group>"; };
 		3375C3411D89914500484558 /* ItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemCell.h; sourceTree = "<group>"; };
 		3375C3421D89914500484558 /* ItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemCell.m; sourceTree = "<group>"; };
+		3375C3441D89BBE400484558 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		3375C3451D89BBE400484558 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +70,8 @@
 		3375C3201D88471200484558 /* Homepwner */ = {
 			isa = PBXGroup;
 			children = (
+				3375C3441D89BBE400484558 /* DetailViewController.h */,
+				3375C3451D89BBE400484558 /* DetailViewController.m */,
 				3375C3411D89914500484558 /* ItemCell.h */,
 				3375C3421D89914500484558 /* ItemCell.m */,
 				3375C3241D88471200484558 /* AppDelegate.h */,
@@ -171,6 +176,7 @@
 				3375C3261D88471200484558 /* AppDelegate.m in Sources */,
 				3375C3231D88471200484558 /* main.m in Sources */,
 				3375C3401D88743C00484558 /* ItemStore.m in Sources */,
+				3375C3461D89BBE400484558 /* DetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
