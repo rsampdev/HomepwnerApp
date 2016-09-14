@@ -9,11 +9,9 @@
 #import "ItemsViewController.h"
 #import "ItemStore.h"
 #import "Item.h"
+#import "ItemCell.h"
 
 @interface ItemsViewController ()
-
-@property (nullable, nonatomic) NSMutableArray *itemsUnderFifty;
-@property (nullable, nonatomic) NSMutableArray *itemsOverFifty;
 
 @end
 
@@ -27,107 +25,53 @@
     UIEdgeInsets insets = UIEdgeInsetsMake(statusBarHeight, 0, 0, 0);
     self.tableView.contentInset = insets;
     self.tableView.scrollIndicatorInsets = insets;
-    self.itemsUnderFifty = [[NSMutableArray alloc] init];
-    self.itemsOverFifty = [[NSMutableArray alloc] init];
-    
-    Item *item = nil;
-    
-    for (int i = 0; i < self.itemStore.allItems.count; i++) {
-        item = self.itemStore.allItems[i];
-        
-        if (item.valueInDollars >= 50) {
-            [self.itemsOverFifty addObject:item];
-        } else if (item.valueInDollars < 50) {
-            [self.itemsUnderFifty addObject:item];
-        }
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedRowHeight = 65;
+}
+
+// MARK: - Actions
+
+- (IBAction)addNewItem:(id)sender {
+    Item *newItem = [self.itemStore createItem];
+    NSUInteger itemIndex = [self.itemStore.allItems indexOfObject:newItem];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:itemIndex inSection:0];
+    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+}
+
+- (IBAction)toggleEditingMode:(id)sender {
+    if (self.editing) {
+        [sender setTitle:@"Edit" forState:UIControlStateNormal];
+        [self setEditing:NO animated:YES];
+    } else {
+        [sender setTitle:@"Done" forState:UIControlStateNormal];
+        [self setEditing:YES animated:YES];
     }
 }
 
 // MARK: - Table View Data Source and Delegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    NSInteger rtn = 1;
-    
-    if (self.itemsUnderFifty != nil && self.itemsOverFifty != nil) {
-        if (self.itemsUnderFifty.count >= 1 || self.itemsOverFifty.count >= 1) {
-            rtn++;
-            if (self.itemsOverFifty.count >= 1 && self.itemsUnderFifty.count >= 1) {
-                rtn++;
-            }
-        }
-    } else {
-        rtn = 0;
-    }
-    
-    return rtn;
-}
-
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    NSString *rtn = @"Empty";
-    
-    if (section == 0) {
-        if (self.itemsUnderFifty.count == 0 && self.itemsOverFifty.count == 0) {
-            rtn = @"Empty";
-        } else {
-            if (self.itemsOverFifty.count == 0) {
-                rtn = @"Items under $50";
-            } else {
-                rtn = @"Items over $50";
-            }
-        }
-    } else if (section == 1) {
-        rtn = @"Items over $50";
-    }
-    
-    return rtn;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSInteger rtn = 0;
-    
-    if (section == 0) {
-        if (self.itemsOverFifty.count == 0) {
-            rtn = self.itemsUnderFifty.count + 1;
-        } else {
-            if (self.itemsUnderFifty.count == 0) {
-                rtn = self.itemsOverFifty.count + 1;
-            } else {
-                rtn = self.itemsUnderFifty.count;
-            }
-        }
-    } else if (section == 1) {
-        rtn = self.itemsOverFifty.count + 1;
-    }
-    
-    return rtn;
+    return self.itemStore.allItems.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"UITableViewCell" forIndexPath:indexPath];
+    ItemCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"ItemCell" forIndexPath:indexPath];
     
-    if (self.itemsUnderFifty.count == 0 && self.itemsOverFifty.count == 0) {
+    if (self.itemStore.allItems.count == 0) {
         cell.textLabel.text = @"No more items!";
         cell.detailTextLabel.text = @"";
     } else {
-        
-        Item *item = nil;
-        NSInteger section = indexPath.section;
         NSInteger row = indexPath.row;
+        [cell updateLabels];
+        Item *item = self.itemStore.allItems[row];
         
-        if ((section == 0 || self.itemsOverFifty.count == 0) && row < self.itemsUnderFifty.count) {
-            item = self.itemsUnderFifty[row];
-        } else if ((section == 1 || self.itemsUnderFifty.count == 0) && row < self.itemsOverFifty.count) {
-            item = self.itemsOverFifty[row];
-        }
-        
-        cell.textLabel.text = item.name;
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"$%d", item.valueInDollars];
-        
-        if (item == self.itemsUnderFifty.lastObject && row == self.itemsUnderFifty.count - 1 && self.itemsOverFifty.count == 0) {
-            [self.itemsUnderFifty addObject:[[Item alloc] initWithName:@"No more items!" serialNumber:@"" valueInDollars:-1]];
-        } else if (item == self.itemsOverFifty.lastObject && row == self.itemsOverFifty.count - 1) {
-            [self.itemsOverFifty addObject:[[Item alloc] initWithName:@"No more items!" serialNumber:@"" valueInDollars:-1]];
-        }
+        cell.nameLabel.text = item.name;
+        cell.serialNumberLabel.text = item.serialNumber;
+        cell.valueLabel.text = [NSString stringWithFormat:@"$%d", item.valueInDollars];
         
         if (item.valueInDollars < 0) {
             cell.detailTextLabel.text = @"";
@@ -135,6 +79,31 @@
     }
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        Item *item = self.itemStore.allItems[indexPath.row];
+        
+        NSString *title = [NSString stringWithFormat:@"Delete %@?", item.name];
+        NSString *message = @"Are you sure that you want to delete this item?";
+        UIAlertController *ac = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleActionSheet];
+        
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+        UIAlertAction *deleteAction = [UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+            [self.itemStore removeItem:item];
+            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        }];
+        
+        [ac addAction:cancelAction];
+        [ac addAction:deleteAction];
+        
+        [self presentViewController:ac animated:YES completion:nil];
+    }
+}
+
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
+    [self.itemStore moveItemAtIndex:sourceIndexPath.row toIndex:destinationIndexPath.row];
 }
 
 @end

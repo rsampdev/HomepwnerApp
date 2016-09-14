@@ -15,6 +15,7 @@
 		3375C33A1D88479700484558 /* ItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3375C3391D88479700484558 /* ItemsViewController.m */; };
 		3375C33D1D88605100484558 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 3375C33C1D88605100484558 /* Item.m */; };
 		3375C3401D88743C00484558 /* ItemStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 3375C33F1D88743C00484558 /* ItemStore.m */; };
+		3375C3431D89914500484558 /* ItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3375C3421D89914500484558 /* ItemCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,8 @@
 		3375C33C1D88605100484558 /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Item.m; sourceTree = "<group>"; };
 		3375C33E1D88743C00484558 /* ItemStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemStore.h; sourceTree = "<group>"; };
 		3375C33F1D88743C00484558 /* ItemStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemStore.m; sourceTree = "<group>"; };
+		3375C3411D89914500484558 /* ItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemCell.h; sourceTree = "<group>"; };
+		3375C3421D89914500484558 /* ItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +67,8 @@
 		3375C3201D88471200484558 /* Homepwner */ = {
 			isa = PBXGroup;
 			children = (
+				3375C3411D89914500484558 /* ItemCell.h */,
+				3375C3421D89914500484558 /* ItemCell.m */,
 				3375C3241D88471200484558 /* AppDelegate.h */,
 				3375C3251D88471200484558 /* AppDelegate.m */,
 				3375C32D1D88471200484558 /* Assets.xcassets */,
@@ -160,6 +165,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3375C3431D89914500484558 /* ItemCell.m in Sources */,
 				3375C33D1D88605100484558 /* Item.m in Sources */,
 				3375C33A1D88479700484558 /* ItemsViewController.m in Sources */,
 				3375C3261D88471200484558 /* AppDelegate.m in Sources */,
@@ -319,6 +325,7 @@
 				3375C3371D88471200484558 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
