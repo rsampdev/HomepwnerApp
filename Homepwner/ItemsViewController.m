@@ -36,9 +36,9 @@
         item = self.itemStore.allItems[i];
         
         if (item.valueInDollars >= 50) {
-            [self.itemsOverFifty addObject:item];
+            //[self.itemsOverFifty addObject:item];
         } else if (item.valueInDollars < 50) {
-            [self.itemsUnderFifty addObject:item];
+            //[self.itemsUnderFifty addObject:item];
         }
     }
     
@@ -48,7 +48,7 @@
 // MARK: - Table View Data Source and Delegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    NSInteger rtn = 0;
+    NSInteger rtn = 1;
     
     if (self.itemsUnderFifty != nil && self.itemsOverFifty != nil) {
         if (self.itemsUnderFifty.count >= 1 || self.itemsOverFifty.count >= 1) {
@@ -57,19 +57,25 @@
                 rtn++;
             }
         }
+    } else {
+        rtn = 0;
     }
     
     return rtn;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    NSString *rtn = @"Unknown";
+    NSString *rtn = @"Empty";
     
     if (section == 0) {
-        if (self.itemsUnderFifty.count == 0) {
-            rtn = @"Items over $50";
+        if (self.itemsUnderFifty.count == 0 && self.itemsOverFifty.count == 0) {
+            rtn = @"Empty";
         } else {
-            rtn = @"Items under $50";
+            if (self.itemsOverFifty.count == 0) {
+                rtn = @"Items over $50";
+            } else {
+                rtn = @"Items under $50";
+            }
         }
     } else if (section == 1) {
         rtn = @"Items over $50";
@@ -99,8 +105,12 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"\n\n\n\n\nworking...");
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"UITableViewCell" forIndexPath:indexPath];
+    
+    if (self.itemsUnderFifty.count == 0 && self.itemsOverFifty.count == 0) {
+        cell.textLabel.text = @"No more items!";
+        cell.detailTextLabel.text = @"";
+    } else {
     
     Item *item = nil;
     NSInteger section = indexPath.section;
@@ -123,6 +133,7 @@
     
     if (item.valueInDollars < 0) {
         cell.detailTextLabel.text = @"";
+    }
     }
     
     return cell;
