@@ -12,6 +12,7 @@
 @interface ItemStore ()
 
 @property (nonatomic) NSMutableArray *items;
+@property (nonatomic) NSURL *itemArchiveURL;
 
 @end
 
@@ -21,6 +22,13 @@
     self = [super init];
     if (self) {
         _items = [NSMutableArray array];
+        
+        NSArray *directories = [[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask];
+        NSURL *documentDirectory = directories.firstObject;
+        _itemArchiveURL = [documentDirectory URLByAppendingPathComponent:@"items.archive"];
+        
+        NSArray *loadedItems = [NSKeyedUnarchiver unarchiveObjectWithFile:self.itemArchiveURL.path];
+        [_items addObjectsFromArray:loadedItems];
     }
     return self;
 }
@@ -48,6 +56,13 @@
     Item *item = self.items[oldIndex];
     [self.items removeObjectAtIndex:oldIndex];
     [self.items insertObject:item atIndex:newIndex];
+}
+
+// MARK: - Saving/Loading
+
+- (BOOL)saveChanges {
+    NSLog(@"Saving the store to %@", self.itemArchiveURL);
+    return [NSKeyedArchiver archiveRootObject:self.items toFile:self.itemArchiveURL.path];
 }
 
 @end
