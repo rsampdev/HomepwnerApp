@@ -17,6 +17,7 @@
 		3375C3401D88743C00484558 /* ItemStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 3375C33F1D88743C00484558 /* ItemStore.m */; };
 		3375C3431D89914500484558 /* ItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3375C3421D89914500484558 /* ItemCell.m */; };
 		3375C3461D89BBE400484558 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3375C3451D89BBE400484558 /* DetailViewController.m */; };
+		33EC879A1D8A1AC30006CB85 /* ImageStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 33EC87991D8A1AC30006CB85 /* ImageStore.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,8 @@
 		3375C3421D89914500484558 /* ItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemCell.m; sourceTree = "<group>"; };
 		3375C3441D89BBE400484558 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		3375C3451D89BBE400484558 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		33EC87981D8A1AC30006CB85 /* ImageStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageStore.h; sourceTree = "<group>"; };
+		33EC87991D8A1AC30006CB85 /* ImageStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageStore.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +73,8 @@
 		3375C3201D88471200484558 /* Homepwner */ = {
 			isa = PBXGroup;
 			children = (
+				33EC87981D8A1AC30006CB85 /* ImageStore.h */,
+				33EC87991D8A1AC30006CB85 /* ImageStore.m */,
 				3375C3441D89BBE400484558 /* DetailViewController.h */,
 				3375C3451D89BBE400484558 /* DetailViewController.m */,
 				3375C3411D89914500484558 /* ItemCell.h */,
@@ -177,6 +182,7 @@
 				3375C3231D88471200484558 /* main.m in Sources */,
 				3375C3401D88743C00484558 /* ItemStore.m in Sources */,
 				3375C3461D89BBE400484558 /* DetailViewController.m in Sources */,
+				33EC879A1D8A1AC30006CB85 /* ImageStore.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

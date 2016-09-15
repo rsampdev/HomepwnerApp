@@ -8,13 +8,15 @@
 
 #import "DetailViewController.h"
 #import "Item.h"
+#import "ImageStore.h"
 
-@interface DetailViewController () <UITextFieldDelegate>
+@interface DetailViewController () <UITextFieldDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UITextField *nameField;
 @property (strong, nonatomic) IBOutlet UITextField *serialNumberField;
 @property (strong, nonatomic) IBOutlet UITextField *valueField;
 @property (strong, nonatomic) IBOutlet UILabel *dateLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *imageView;
 
 @end
 
@@ -36,6 +38,9 @@
     self.serialNumberField.text = self.item.serialNumber;
     self.valueField.text = [[self valueFormatter] stringFromNumber:@(self.item.valueInDollars)];
     self.dateLabel.text = [[self dateFormatter] stringFromDate:self.item.dateCreated];
+    NSString *key = self.item.itemKey;
+    UIImage *imageToDisplay = [self.imageStore imageForKey:key];
+    self.imageView.image = imageToDisplay;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -56,6 +61,33 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
     return YES;
+}
+
+// MARK: - Image Picker Delegate
+
+- (IBAction)cameraButtonTapped:(UIBarButtonItem *)sender {
+    UIImagePickerController *ipc = [UIImagePickerController new];
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        ipc.sourceType = UIImagePickerControllerSourceTypeCamera;
+    } else {
+        ipc.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    }
+    
+    ipc.delegate = self;
+    [self presentViewController:ipc animated:YES completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+    UIImage *image = (UIImage *)info[UIImagePickerControllerOriginalImage];
+    [self.imageStore setImage:image forKey:self.item.itemKey];
+    self.imageView.image = image;
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)removeImageButtonTapped:(UIBarButtonItem *)sender {
+    UIImage *image = [[UIImage alloc] init];
+    [self.imageStore setImage:image forKey:self.item.itemKey];
+    self.imageView.image = image;
 }
 
 // MARK: - Formatters

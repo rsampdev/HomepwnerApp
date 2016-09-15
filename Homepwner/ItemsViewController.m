@@ -11,6 +11,7 @@
 #import "Item.h"
 #import "ItemCell.h"
 #import "DetailViewController.h"
+#import "ImageStore.h"
 
 @interface ItemsViewController ()
 
@@ -46,6 +47,7 @@
         Item *item = self.itemStore.allItems[row];
         DetailViewController *dvc = (DetailViewController *)segue.destinationViewController;
         dvc.item = item;
+        dvc.imageStore = self.imageStore;
     }
 }
 
@@ -102,6 +104,7 @@
         UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
         UIAlertAction *deleteAction = [UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
             [self.itemStore removeItem:item];
+            [self.imageStore deleteImageForKey:item.itemKey];
             [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
         }];
         

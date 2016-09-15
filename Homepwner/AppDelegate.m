@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "ItemStore.h"
 #import "ItemsViewController.h"
+#import "ImageStore.h"
 
 @interface AppDelegate ()
 
@@ -18,9 +19,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     ItemStore *itemStore = [ItemStore new];
+    ImageStore *imageStore = [ImageStore new];
     UINavigationController *navController = (UINavigationController *)self.window.rootViewController;
     ItemsViewController *ivc = (ItemsViewController *)navController.topViewController;
-    ivc.itemStore = itemStore;    return YES;
+    ivc.itemStore = itemStore;
+    ivc.imageStore = imageStore;
+    return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

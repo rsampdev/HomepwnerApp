@@ -144,20 +144,41 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="248" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="Eaa-wm-Py5"/>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="xS6-GJ-8lB" firstAttribute="leading" secondItem="bgj-bk-cpA" secondAttribute="leading" id="7ML-Uu-ITs"/>
                                     <constraint firstItem="bgj-bk-cpA" firstAttribute="leading" secondItem="cWZ-Ej-FG2" secondAttribute="leading" id="MaK-BD-98b"/>
                                 </constraints>
                             </stackView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="02d-Ua-Ht9">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="eKy-t6-VBF"/>
+                                </constraints>
+                                <items>
+                                    <barButtonItem systemItem="camera" id="jBV-zs-sN6">
+                                        <connections>
+                                            <action selector="cameraButtonTapped:" destination="ORz-1c-rLl" id="eFC-ws-HXD"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="Delete Photo" id="DAR-e4-w1e">
+                                        <connections>
+                                            <action selector="removeImageButtonTapped:" destination="ORz-1c-rLl" id="KtP-z4-wra"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="02d-Ua-Ht9" firstAttribute="top" secondItem="agf-ag-Tq3" secondAttribute="bottom" constant="8" id="0p8-pL-9gD"/>
                             <constraint firstItem="agf-ag-Tq3" firstAttribute="top" secondItem="Etc-j5-VRF" secondAttribute="bottom" constant="8" id="9hj-rK-3iP"/>
+                            <constraint firstItem="bFF-55-JdF" firstAttribute="top" secondItem="02d-Ua-Ht9" secondAttribute="bottom" id="HHC-hk-QkY"/>
+                            <constraint firstAttribute="trailing" secondItem="02d-Ua-Ht9" secondAttribute="trailing" id="KHm-C4-iX0"/>
                             <constraint firstAttribute="trailingMargin" secondItem="agf-ag-Tq3" secondAttribute="trailing" id="R0e-LI-93q"/>
                             <constraint firstItem="agf-ag-Tq3" firstAttribute="leading" secondItem="IPy-NO-hw0" secondAttribute="leadingMargin" id="fAR-3E-kHr"/>
-                            <constraint firstItem="bFF-55-JdF" firstAttribute="top" secondItem="agf-ag-Tq3" secondAttribute="bottom" constant="8" id="pIs-IG-fiD"/>
+                            <constraint firstItem="02d-Ua-Ht9" firstAttribute="leading" secondItem="IPy-NO-hw0" secondAttribute="leading" id="oet-3p-Szp"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="nn6-dG-2bG" appends="YES" id="afp-c1-DyG"/>
@@ -165,6 +186,7 @@
                     </view>
                     <connections>
                         <outlet property="dateLabel" destination="yxA-nS-jNB" id="UIJ-eg-WVN"/>
+                        <outlet property="imageView" destination="Eaa-wm-Py5" id="dmv-BG-Y4u"/>
                         <outlet property="nameField" destination="dfq-fl-3uI" id="2cT-K7-ESY"/>
                         <outlet property="serialNumberField" destination="lh3-pp-4wk" id="82m-Qh-zHn"/>
                         <outlet property="valueField" destination="GZE-In-9Qu" id="k4W-Sp-4wn"/>
